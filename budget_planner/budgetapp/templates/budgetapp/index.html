@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+<head>
+    <style>
+        h1 {text-align: center}
+        span {text-align: left}
+    </style>
+    <meta charset="UTF-8">
+    <title>Personal wallet</title>
+</head>
+<h1>Personal wallet</h1>
+<body>
+<article data-theme="dark">
+    <nav style="margin-bottom: 20px; border-bottom: 2px solid; padding-left: 30px">
+    </nav>
+    <div class='container'>
+        <nav>
+            {% if user.is_authenticated %}
+            <ul>
+                <li><a href="/category/" role="button">Add category</a></li>
+                <li><a href="/expenses/" role="button">Add expenses</a></li>
+                <li><a href="/report/" role="button">Report</a></li>
+            </ul>
+            <ul>
+                <li>Welcome <b>{{ user.username }}!</b></li>
+                <li><a href="{% url 'signout' %}" role="button" class="secondary">Sign Out</a></li>
+            </ul>
+            {% else %}
+            <ul>
+                <li><a href="/signup/" role="button" class="secondary">Sign Up</a></li>
+                <li><a href="/signin/" role="button" class="contrast">Sign in</a></li>
+            </ul>
+            {% endif %}
+        </nav>
+    </div>
+</article>
+</body>
+</html>

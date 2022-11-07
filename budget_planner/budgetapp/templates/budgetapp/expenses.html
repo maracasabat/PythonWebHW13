@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Expenses</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css"/>
+    <style>
+        h1 {text-align: center}
+    </style>
+</head>
+<h1>Personal wallet</h1>
+<body>
+<article data-theme="dark">
+    <main class="container">
+        <nav style="margin-bottom: 20px; border-bottom: 2px solid; padding-left: 30px">
+            <ul>
+                <li><a href="/" role="button"> Go back to the main page </a></li>
+            </ul>
+        </nav>
+        {% if error%}
+        <nav>
+            <mark>{{ error }}</mark>
+        </nav>
+        {% endif %}
+        <form method="POST" action="{% url 'expenses' %}">
+            {% csrf_token %}
+            <label>
+                Expense name:
+                <input type="text" name="name" required/>
+            </label>
+            <label>
+                Expense value:
+                <input type="number" name="value" required/>
+                <label>
+                    Expense category:
+                    <select name="category" required>
+                        {% for category in categories %}
+                        <option value="{{category.id}}">{{category.username}}</option>
+                        {% endfor %}
+                    </select>
+                </label>
+            </label>
+            <div class="grid">
+                <button type="submit">Submit</button>
+                <button type="reset" class="secondary">Reset</button>
+            </div>
+        </form>
+    </main>
+</article>
+</body>
+</html>
